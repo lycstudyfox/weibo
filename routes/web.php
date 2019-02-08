@@ -12,4 +12,4 @@
 */
 
 Route::get('/', 'IndexController@index');
-Route::get('/help', 'IndexController@help');
+Route::get('/help', 'IndexController@help')->name('help');

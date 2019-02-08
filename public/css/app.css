@@ -11448,11 +11448,16 @@ footer {
   font-weight: bold;
 }
 
-a {
+footer a {
   color: #555;
 }
 
-a:hover {
+footer a:hover {
   color: #222;
+}
+
+footer img.brand-icon {
+  width: 17px;
+  height: 17px;
 }
 
