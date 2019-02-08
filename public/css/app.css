@@ -11439,9 +11439,14 @@ a.text-dark:focus {
   }
 }
 
+nav.navbar.navbar-expand-lg {
+  margin-bottom: 20px;
+}
+
 footer {
-  magrin-top: 45px;
-  padding_top: 5px;
+  margin-top: 45px;
+  margin-bottom: 30px;
+  padding-top: 5px;
   border-top: 1px solid #eaeaea;
   color: 777;
   font-size: 13px;
