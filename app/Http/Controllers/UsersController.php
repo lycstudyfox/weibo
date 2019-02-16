@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UsersController extends Controller
 {
     public function create()
     {
         return view('users.create');
+    }
+
+    public function show(User $user)
+    {
+        //compact方法将$user对象转化为一个数组，传递给视图的用户数据
+        return view('users.show', compact('user'));
     }
 
     public function store(Request $request)
@@ -18,6 +25,13 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users|max:200',
             'password' => 'required|confirmed|min:6',
         ]);
-        return;
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+
+        return redirect()->route('users.show', [$user]);
     }
 }
