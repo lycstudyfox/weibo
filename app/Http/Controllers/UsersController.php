@@ -32,6 +32,9 @@ class UsersController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        // flash 仅在下一次请求内有效
+        session()->flash('success', '注册成功！');
+
         return redirect()->route('users.show', [$user]);
     }
 }
