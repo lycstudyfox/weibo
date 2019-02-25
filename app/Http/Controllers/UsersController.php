@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -18,6 +19,7 @@ class UsersController extends Controller
         return view('users.show', compact('user'));
     }
 
+    // 用户注册
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -32,9 +34,15 @@ class UsersController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        Auth::login($user);
         // flash 仅在下一次请求内有效
         session()->flash('success', '注册成功！');
 
         return redirect()->route('users.show', [$user]);
+    }
+
+    public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
     }
 }
