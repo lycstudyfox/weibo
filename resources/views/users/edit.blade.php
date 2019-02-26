@@ -15,7 +15,7 @@
                     <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="avatar">
                 </div>
 
-                <form method="POST" action="{{ route('users.update', $user->id) }}">
+                <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
 
                     {{ method_field('PATCH') }}
                     <!-- <input type="hidden" name="_method" value="PATHC"> -->
@@ -44,7 +44,7 @@
 
                     <div class="form-group">
                         <label for="" class="avatar-label">用户头像：</label>
-                        <input type="file" class="form-control-file">
+                        <input type="file" name="avatar" class="form-control-file">
 
                         @if ($user->avatar)
                             <img src="{{ $user->avatar }}" alt="" class="thumbnail img-responsive" width="200">

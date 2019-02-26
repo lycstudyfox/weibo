@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
+use App\Handlers\ImageUploadHandler;
 
 class UsersController extends Controller
 {
@@ -46,7 +47,7 @@ class UsersController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(User $user, Request $request)
+    public function update(User $user, Request $request, ImageUploadHandler $uploader)
     {
         $this->validate($request, [
             'name' => 'required|max:50',
@@ -57,6 +58,14 @@ class UsersController extends Controller
         $data['name'] = $request->name;
         if($request->password){
             $data['password'] = bcrypt($request->password);
+        }
+
+        // 用户头像
+        if ($request->avatar){
+            $result = $uploader->save($request->avatar, 'avatars', $user->id);
+            if ($result) {
+                $data['avatar'] = $result['path'];
+            }
         }
         $user->update($data);
 
