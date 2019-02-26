@@ -11,7 +11,7 @@
 
                 @include('shared._errors')
 
-                <form method="POST" action="{{ route('users.update'), $user->id }}">
+                <form method="POST" action="{{ route('users.update', $user->id) }}">
 
                     {{ method_field('PATCH') }}
                     <!-- <input type="hidden" name="_method" value="PATHC"> -->
