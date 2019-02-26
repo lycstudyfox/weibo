@@ -39,3 +39,18 @@ section.user_info {
         margin-top:15px;
     }
 }
+
+.avatar {
+    float: left;
+    max-width: 50px;
+    border-radius: 50%;
+}
+
+.avatar_edit {
+    margin:15px auto;
+    text-align:center;
+    .avatar {
+        float: none;
+        max-width:100px;
+    }
+}

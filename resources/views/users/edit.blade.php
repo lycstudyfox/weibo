@@ -11,6 +11,10 @@
 
                 @include('shared._errors')
 
+                <div class="avatar_edit">
+                    <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="avatar">
+                </div>
+
                 <form method="POST" action="{{ route('users.update', $user->id) }}">
 
                     {{ method_field('PATCH') }}
@@ -36,6 +40,15 @@
                     <div class="form-group">
                         <label for="password">确认密码：</label>
                         <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="avatar-label">用户头像：</label>
+                        <input type="file" class="form-control-file">
+
+                        @if ($user->avatar)
+                            <img src="{{ $user->avatar }}" alt="" class="thumbnail img-responsive" width="200">
+                        @endif
                     </div>
 
                     <button type="submit" class="btn btn-primary">更新</button>
