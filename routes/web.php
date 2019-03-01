@@ -24,3 +24,10 @@ Route::resource('users', 'UsersController');
 // Route::post('/users', 'UsersController@store')->name('users.store');         创建用户
 // Route::patch('/users/{user}', 'UsersController@update')->name('users.update');更新用户
 // Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy');删除用户
+
+// 显示登录页面
+Route::get('login', 'LoginController@create')->name('login');
+// 登录功能
+Route::post('login', 'LoginController@store')->name('login');
+// 退出
+Route::delete('logout', 'LoginController@destroy')->name('logout');
