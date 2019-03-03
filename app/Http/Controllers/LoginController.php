@@ -7,6 +7,14 @@ use Auth;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+        // 只有未登录用户能访问登录页面
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+    }
+
     //登录页面
     public function create()
     {

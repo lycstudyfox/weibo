@@ -14,6 +14,11 @@ class UsersController extends Controller
         $this->middleware('auth', [
             'except' => ['show', 'create', 'store']
         ]);
+
+        // 只有未登录用户能访问注册页面
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
     }
 
     public function create()
@@ -51,11 +56,16 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
+        // 验证用户授权策略
+        $this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
 
     public function update(User $user, Request $request, ImageUploadHandler $uploader)
     {
+        // 验证用户授权策略
+        $this->authorize('update', $user);
+
         $this->validate($request, [
             'name' => 'required|max:50',
             'password' => 'nullable|confirmed|min:6',
