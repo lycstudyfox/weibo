@@ -2,6 +2,7 @@
     <div class="container">
         <a href="/" class="navbar-brand">雪狐微博</a>
         <ul class="navbar-nav justify-content-end">
+            <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">用户列表</a></li>
             @if (Auth::check())
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -21,10 +22,10 @@
                   </div>
                 </li>
             @else
-                <li class="nav-item"><a href="{{ route('help') }}" class="nav-link">帮助</a></li>
                 <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">登录</a></li>
                 <li class="nav-item"><a href="{{ route('signup') }}" class="nav-link">注册</a></li>
             @endif
+            <li class="nav-item"><a href="{{ route('help') }}" class="nav-link">帮助</a></li>
         </ul>
     </div>
 </nav>
