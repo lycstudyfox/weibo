@@ -11478,6 +11478,11 @@ section.user_info h1 {
   margin-top: 15px;
 }
 
+section.user_info .avatar {
+  float: none;
+  max-width: 70px;
+}
+
 .avatar {
   float: left;
   max-width: 50px;
