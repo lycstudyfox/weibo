@@ -32,3 +32,4 @@ Route::post('login', 'LoginController@store')->name('login');
 // 退出
 Route::delete('logout', 'LoginController@destroy')->name('logout');
 
+Route::get('signup/confirm/{token}', 'UsersController@confirmEmail')->name('confirm_email');

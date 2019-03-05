@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
 use App\Handlers\ImageUploadHandler;
+use Mail;
 
 class UsersController extends Controller
 {
@@ -53,13 +54,29 @@ class UsersController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'activation_token' => str_random(30),
         ]);
 
-        Auth::login($user);
+        // 发送激活邮件
+        $this->sendEmailConfirmation($user);
+
+        // Auth::login($user);
         // flash 仅在下一次请求内有效
-        session()->flash('success', '注册成功！');
+        session()->flash('success', '已发送验证邮件，请注意查收激活！');
 
         return redirect()->route('users.show', [$user]);
+    }
+
+    protected function sendEmailConfirmation($user)
+    {
+        $view = 'emails.confirm';
+        $data = compact('user');
+        $to = $user->email;
+        $subject = '感谢您注册雪狐微博，请尽快激活！';
+
+        Mail::send($view, $data, function($message) use ($to, $subject) {
+            $message->to($to)->subject($subject);
+        });
     }
 
     public function edit(User $user)
