@@ -31,3 +31,4 @@ Route::get('login', 'LoginController@create')->name('login');
 Route::post('login', 'LoginController@store')->name('login');
 // 退出
 Route::delete('logout', 'LoginController@destroy')->name('logout');
+
