@@ -20,7 +20,7 @@ class User extends Authenticatable
      * 过滤用户提交的字段
      */
     protected $fillable = [
-        'name', 'email', 'password','avatar',
+        'name', 'email', 'password','avatar', 'activation_token',
     ];
 
     /**

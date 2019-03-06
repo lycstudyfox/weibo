@@ -30,8 +30,16 @@ class LoginController extends Controller
         ]);
 
         if(Auth::attempt($credentials, $request->has('remember'))){
-            session()->flash('success', '登录成功！');
-            return redirect()->route('users.show', [Auth::user()]);
+            // 判断是否激活
+            if(Auth::user()->activated){
+                session()->flash('success', '登录成功！');
+                return redirect()->route('users.show', [Auth::user()]);
+            } else {
+                Auth::logout();
+                session()->flash('warning', '您的账号未激活，请登录邮箱进行激活哦！');
+                return redirect('/');
+            }
+
         }else{
             session()->flash('danger', '抱歉，登录失败！');
             return redirect()->back()->withInput();

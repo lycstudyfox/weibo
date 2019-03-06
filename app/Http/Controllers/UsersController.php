@@ -13,7 +13,7 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth', [
-            'except' => ['show', 'create', 'store', 'index']
+            'except' => ['show', 'create', 'store', 'index', 'confirmEmail']
         ]);
 
         // 只有未登录用户能访问注册页面
@@ -77,6 +77,21 @@ class UsersController extends Controller
         Mail::send($view, $data, function($message) use ($to, $subject) {
             $message->to($to)->subject($subject);
         });
+    }
+
+    public function confirmEmail($token)
+    {
+        // 查询并获取首条记录
+        $user = User::where('activation_token', $token)->firstOrFail();
+
+        $user->activation_token = null;
+        $user->activated = true;
+        $user->save();
+
+        // 激活成功后登录状态
+        Auth::login($user);
+        session()->flash('success', '激活成功！');
+        return redirect()->route('users.show', [$user]); //跳转个人中心
     }
 
     public function edit(User $user)
