@@ -36,3 +36,11 @@ Route::get('signup/confirm/{token}', 'UsersController@confirmEmail')->name('conf
 
 http://weibo.test/signup/confirm/q4c4veBYaPydfwRk0p8wBCX6nDRW8h
 
+// 重置密码页面
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+// 重置链接
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+// 密码更新页面
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+// 密码更新功能
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
