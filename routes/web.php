@@ -33,8 +33,7 @@ Route::post('login', 'LoginController@store')->name('login');
 Route::delete('logout', 'LoginController@destroy')->name('logout');
 
 Route::get('signup/confirm/{token}', 'UsersController@confirmEmail')->name('confirm_email');
-
-http://weibo.test/signup/confirm/q4c4veBYaPydfwRk0p8wBCX6nDRW8h
+// http://weibo.test/signup/confirm/q4c4veBYaPydfwRk0p8wBCX6nDRW8h
 
 // 重置密码页面
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
