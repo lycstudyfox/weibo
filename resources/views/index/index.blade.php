@@ -9,13 +9,12 @@
                     @include('users._status_create')
                 </section>
             </div>
+            <aside class="col-md-4">
+                <section class="user_info">
+                    @include('users._user_info', ['user' => Auth::user()])
+                </section>
+            </aside>
         </div>
-
-        <aside class="col-md-4">
-            <section class="user_info">
-                @include('users._user_info', ['user' => Auth::user()])
-            </section>
-        </aside>
     @else
         <h1>首页</h1>
     @endif
