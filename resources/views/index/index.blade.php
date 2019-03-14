@@ -10,20 +10,7 @@
                 </section>
                 <h4>微博列表</h4>
                 <hr>
-                <section class="status">
-                    @if ($status_items->count() > 0)
-                        <ul class="list-unstyled">
-                            @foreach ($status_items as $status)
-                                @include('users._status', ['user' => $status->user])
-                            @endforeach
-                        </ul>
-                        <div class="mt-5">
-                            {!! $status_items->render() !!}
-                        </div>
-                    @else
-                        <p>还没有微博哦~</p>
-                    @endif
-                </section>
+                @include('users._status_feed')
             </div>
             <aside class="col-md-4">
                 <section class="user_info">
@@ -32,6 +19,10 @@
             </aside>
         </div>
     @else
-        <h1>首页</h1>
+        <div>
+            <h4>微博列表</h4>
+            <hr>
+            @include('users._status_feed')
+        </div>
     @endif
 @stop

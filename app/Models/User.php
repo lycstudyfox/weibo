@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -42,6 +43,6 @@ class User extends Authenticatable
     // 首页数据加载
     public function feed()
     {
-        return $this->statuses()->orderBy('created_at', 'desc');
+        return Status::orderBy('created_at', 'desc');
     }
 }

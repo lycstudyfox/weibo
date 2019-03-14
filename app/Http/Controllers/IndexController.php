@@ -14,6 +14,8 @@ class IndexController extends Controller
         $status_items = [];
         if(Auth::check()){
             $status_items = Auth::user()->feed()->paginate(10);
+        }else{
+            $status_items = Status::orderBy('created_at', 'desc')->paginate(10);
         }
         return view('index/index', compact('status_items'));
     }
