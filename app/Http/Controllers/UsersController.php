@@ -37,8 +37,9 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        //compact方法将$user对象转化为一个数组，传递给视图的用户数据
-        return view('users.show', compact('user'));
+        //compact方法将$user\$statuses对象转化为一个数组，传递给视图的用户数据
+        $statuses = $user->statuses()->orderBy('created_at', 'desc')->paginate(10);
+        return view('users.show', compact('user', 'statuses'));
     }
 
     // 用户注册
