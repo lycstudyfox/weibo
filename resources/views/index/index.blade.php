@@ -16,6 +16,9 @@
                 <section class="user_info">
                     @include('users._user_info', ['user' => Auth::user()])
                 </section>
+                <section class="stats mt-2">
+                    @include('users._stats', ['user' => Auth::user()])
+                </section>
             </aside>
         </div>
     @else
