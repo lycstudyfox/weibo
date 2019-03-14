@@ -38,4 +38,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Status::class);
     }
+
+    // 首页数据加载
+    public function feed()
+    {
+        return $this->statuses()->orderBy('created_at', 'desc');
+    }
 }
