@@ -57,4 +57,36 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
     }
+
+    // 判断当前登录用户是否关注了某用户
+    public function isFollowing($user_id)
+    {
+        // 仅需判断某用户是否在当前登录用户的关注人列表上即可
+        return $this->followings->contains($user_id);
+    }
+
+    // 关注
+    public function follow($user_ids)
+    {
+        // $user_ids应为ID数组
+        if( ! is_array($user_ids)){
+            // 不为数组则转换下
+            $user_ids = compact('user_ids');
+        }
+        // sync则添加关联id，第二个参数false意为不移除其它关注ID，默认为true,则移除
+        $this->followings()->sync($user_ids, false);
+    }
+
+    // 取消关注
+    public function unfollow($user_ids)
+    {
+        // $user_ids应为ID数组
+        if( ! is_array($user_ids)){
+            // 不为数组则转换下
+            $user_ids = compact('user_ids');
+        }
+        // detach取消关联
+        $this->followings()->detach($user_ids);
+    }
+
 }
